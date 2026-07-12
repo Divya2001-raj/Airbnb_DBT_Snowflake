@@ -1,4 +1,5 @@
 # 🏡 Airbnb Data Pipeline using dbt & Snowflake
+<img width="1024" height="1536" alt="ChatGPT Image Jul 12, 2026, 09_43_52 PM" src="https://github.com/user-attachments/assets/7f4bf025-3e75-4684-bce7-fee8d8f386f9" />
 
 > 🚀 **End-to-End ELT Data Engineering Project** built using **dbt Core**, **Snowflake**, **SQL**, and the **Medallion Architecture (Bronze → Silver → Gold)**.
 
