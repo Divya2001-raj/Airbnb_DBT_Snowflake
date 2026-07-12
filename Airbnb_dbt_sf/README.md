@@ -1,301 +1,222 @@
-Perfect! We'll build it section by section. Here's **Part 1** of your professional `README.md`.
+# 🏡 Airbnb Data Pipeline using dbt & Snowflake
 
-> Paste this at the beginning of your `README.md`. I'll provide **Part 2** next.
-
-````markdown
-# 🏠 Airbnb Data Pipeline using dbt & Snowflake
-
-<p align="center">
-
-![dbt](https://img.shields.io/badge/dbt-Core-orange?style=for-the-badge&logo=dbt)
-![Snowflake](https://img.shields.io/badge/Snowflake-Cloud_Data_Warehouse-29B5E8?style=for-the-badge&logo=snowflake)
-![SQL](https://img.shields.io/badge/SQL-Advanced-blue?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.11-yellow?style=for-the-badge&logo=python)
-![GitHub](https://img.shields.io/badge/GitHub-Version_Control-black?style=for-the-badge&logo=github)
-
-</p>
-
-<p align="center">
-
-# End-to-End ELT Pipeline using dbt & Snowflake
-
-Transforming raw Airbnb data into analytics-ready datasets using the Medallion Architecture.
-
-</p>
+> 🚀 **End-to-End ELT Data Engineering Project** built using **dbt Core**, **Snowflake**, **SQL**, and the **Medallion Architecture (Bronze → Silver → Gold)**.
 
 ---
 
-# 📖 Overview
+## 🌟 Project Overview
 
-This project demonstrates a modern **Data Engineering ELT pipeline** built using **dbt Core** and **Snowflake**.
+This project demonstrates how to build a scalable ELT pipeline using **dbt Core** and **Snowflake**. Raw Airbnb datasets are transformed into clean, analytics-ready models by following industry-standard data engineering practices.
 
-The pipeline ingests raw Airbnb datasets, transforms them through multiple layers following the **Medallion Architecture**, and produces analytics-ready datasets for reporting and business intelligence.
+### 🎯 Key Highlights
 
-The project showcases industry-standard data engineering practices including:
-
-- Incremental Models
-- Data Cleaning
-- Data Transformation
-- Slowly Changing Dimensions (SCD Type 2)
-- Snapshot Management
-- Fact & Dimension Modeling
-- Modular SQL Development
-- Version Control using Git
+- ⚡ Incremental Data Loading
+- 🏗️ Medallion Architecture
+- ❄️ Snowflake Cloud Warehouse
+- 📊 Fact & Dimension Modeling
+- 📸 dbt Snapshots (SCD Type 2)
+- 🧹 Data Cleaning & Standardization
+- 🔄 Reusable SQL Models
+- 🌿 Version Control with Git
 
 ---
 
-# 🚀 Tech Stack
+## 🛠️ Tech Stack
 
 | Technology | Purpose |
 |------------|---------|
 | ❄️ Snowflake | Cloud Data Warehouse |
-| 🏗 dbt Core | Data Transformation |
+| 🏗️ dbt Core | Data Transformation |
 | 📝 SQL | Data Modeling |
-| 🐍 Python | Runtime Environment |
+| 🐍 Python | Runtime |
 | 📄 YAML | Snapshot Configuration |
-| 🔄 Git | Version Control |
-| 🐙 GitHub | Source Code Repository |
+| 🌿 Git & GitHub | Version Control |
 
 ---
 
-# 🏗 Solution Architecture
-
-```mermaid
-flowchart LR
-
-A[Raw Airbnb Dataset]
-
-A --> B[Bronze Layer]
-
-B --> C[Silver Layer]
-
-C --> D[Gold Layer]
-
-D --> E[Fact Table]
-
-D --> F[Dimension Tables]
-
-D --> G[One Big Table]
-```
-
----
-
-# 🥇 Medallion Architecture
-
-```mermaid
-flowchart TD
-
-Raw[Raw Airbnb Data]
-
-Raw --> Bronze
-
-Bronze --> Silver
-
-Silver --> Gold
-
-Gold --> Dashboard
-
-style Bronze fill:#CD7F32,color:#fff
-
-style Silver fill:#C0C0C0,color:#000
-
-style Gold fill:#FFD700,color:#000
-```
-
----
-
-# 📂 Repository Structure
+## 🏗️ Solution Architecture
 
 ```text
-Airbnb_DBT_Snowflake
+              Raw Airbnb Dataset
+                     │
+                     ▼
+             🥉 Bronze Layer
+          (Incremental Loading)
+                     │
+                     ▼
+             🥈 Silver Layer
+      (Cleaning & Business Logic)
+                     │
+                     ▼
+              🥇 Gold Layer
+        ┌────────┼─────────┐
+        ▼        ▼         ▼
+   Fact Table  Dimensions   OBT
+                     │
+                     ▼
+         📊 Analytics & Reporting
+```
+
+---
+
+## 📂 Project Structure
+
+```text
+Airbnb_DBT_Snowflake/
 │
-├── models
+├── models/
+│   ├── Bronze/
+│   │   ├── bronze_bookings.sql
+│   │   ├── bronze_hosts.sql
+│   │   └── bronze_listings.sql
 │   │
-│   ├── Bronze
-│   │     bronze_bookings.sql
-│   │     bronze_hosts.sql
-│   │     bronze_listings.sql
+│   ├── Silver/
+│   │   ├── silver_bookings.sql
+│   │   ├── silver_hosts.sql
+│   │   └── silver_listings.sql
 │   │
-│   ├── Silver
-│   │     silver_bookings.sql
-│   │     silver_hosts.sql
-│   │     silver_listings.sql
-│   │
-│   └── Gold
-│         fact.sql
-│         obt.sql
+│   └── Gold/
+│       ├── fact.sql
+│       └── obt.sql
 │
-├── snapshots
-│     dim_bookings.yml
-│     dim_hosts.yml
-│     dim_listings.yml
+├── snapshots/
+│   ├── dim_bookings.yml
+│   ├── dim_hosts.yml
+│   └── dim_listings.yml
 │
-├── macros
-│
+├── macros/
 ├── dbt_project.yml
-│
-├── README.md
-│
-└── profiles.yml
+└── README.md
 ```
 
 ---
 
-# 🔄 Pipeline Flow
+## 🥉 Bronze Layer
 
-```mermaid
-sequenceDiagram
+The Bronze layer ingests raw Airbnb data into Snowflake using **incremental dbt models**.
 
-participant Source
+✨ Features
 
-participant Bronze
+- Incremental Loading
+- Raw Data Storage
+- High Performance
+- Source Preservation
 
-participant Silver
+---
 
-participant Gold
+## 🥈 Silver Layer
 
-participant BI
+The Silver layer transforms raw data into clean, standardized datasets.
 
-Source->>Bronze: Raw Airbnb Data
+✨ Transformations
 
-Bronze->>Silver: Clean &Transform
+- Data Cleaning
+- Null Handling
+- Business Rules
+- Derived Columns
+- Standardization
+- Data Quality Improvements
 
-Silver->>Gold: Business Rules
+---
 
-Gold->>BI: Analytics Ready Tables
+## 🥇 Gold Layer
+
+The Gold layer creates business-ready datasets for analytics.
+
+Includes:
+
+- 📊 Fact Table
+- 📚 Dimension Tables
+- 📈 One Big Table (OBT)
+
+---
+
+## 📸 Snapshots
+
+dbt Snapshots are used to maintain historical records for dimension tables using **Slowly Changing Dimension (SCD Type 2)** methodology.
+
+Snapshot Files:
+
+- dim_bookings.yml
+- dim_hosts.yml
+- dim_listings.yml
+
+---
+
+## 🚀 Getting Started
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Divya2001-raj/Airbnb_DBT_Snowflake.git
+cd Airbnb_DBT_Snowflake
+```
+
+### Install Dependencies
+
+```bash
+pip install dbt-snowflake
+```
+
+### Configure Snowflake Profile
+
+Update your local `profiles.yml` with your Snowflake connection details.
+
+> ⚠️ **Do not commit `profiles.yml` containing credentials to GitHub.**
+
+---
+
+## ⚡ Run dbt
+
+```bash
+dbt debug
+dbt run
+dbt test
+dbt docs generate
+dbt docs serve
 ```
 
 ---
 
-# 📌 Data Engineering Workflow
+## 🎯 Skills Demonstrated
 
-```text
-Source Data
-
-      │
-
-      ▼
-
-Bronze Layer
-
-(Ingestion)
-
-      │
-
-      ▼
-
-Silver Layer
-
-(Data Cleaning)
-
-      │
-
-      ▼
-
-Gold Layer
-
-(Data Modeling)
-
-      │
-
-      ▼
-
-Fact Tables
-
-Dimension Tables
-
-OBT
-
-      │
-
-      ▼
-
-Business Intelligence
-```
+- ✅ Data Engineering
+- ✅ Snowflake
+- ✅ dbt Core
+- ✅ SQL
+- ✅ Incremental Models
+- ✅ Medallion Architecture
+- ✅ ELT Pipelines
+- ✅ Fact & Dimension Modeling
+- ✅ SCD Type 2
+- ✅ Git & GitHub
 
 ---
 
-# 🥉 Bronze Layer
+## 🚀 Future Enhancements
 
-The Bronze layer stores the raw Airbnb datasets with minimal transformations.
-
-### Responsibilities
-
-- Read source tables
-- Incremental data loading
-- Preserve raw data
-- Improve pipeline performance
-
-### Models
-
-- bronze_bookings.sql
-- bronze_hosts.sql
-- bronze_listings.sql
-
-### Features
-
-✅ Incremental Models
-
-✅ Faster execution
-
-✅ Raw historical storage
+- 📌 dbt Source Freshness
+- 📌 Data Quality Tests
+- 📌 GitHub Actions CI/CD
+- 📌 Airflow Orchestration
+- 📌 dbt Documentation Hosting
+- 📌 Performance Optimization
 
 ---
 
-# 🥈 Silver Layer
+## 👩‍💻 Author
 
-The Silver layer applies cleansing and business logic to the Bronze datasets.
+**Divya R**
 
-Typical transformations include:
+**Data Engineer | Snowflake | dbt | SQL | Python**
 
-- Null handling
-- Data standardization
-- Column renaming
-- Derived columns
-- Business calculations
-
-### Models
-
-- silver_bookings.sql
-- silver_hosts.sql
-- silver_listings.sql
+- 🔗 GitHub: https://github.com/Divya2001-raj
+- 💼 LinkedIn: *(Add your LinkedIn profile here)*
 
 ---
 
-## Booking Transformations
+## ⭐ Support
 
-Examples:
+If you found this project useful, please consider **starring ⭐ the repository**.
 
-- Total Booking Amount
-- Stay Duration
-- Standardized Date Formats
-- Derived Metrics
-
----
-
-## Host Transformations
-
-Business Logic Example
-
-| Response Rate | Category |
-|--------------|----------|
-| >95 | Excellent |
-| 80–95 | Good |
-| 60–80 | Fair |
-| <60 | Poor |
-
----
-
-## Listing Transformations
-
-Examples include
-
-- Price Standardization
-- Property Type Cleaning
-- Availability Formatting
-- Derived Price Categories
-
----
-````
-
-In the next message, I'll provide **Part 2**, which includes the **Gold layer, dbt Snapshots, model lineage, installation, commands, skills, future improvements, author section, and a polished footer**.
+Happy Coding! 🚀
