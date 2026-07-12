@@ -3,3 +3,8 @@ models:
   - name: bronze #  Must match the filename of a model -- including case sensitivity.
     config:
       materialized: table
+      
+models:
+  - name: silver #  Must match the filename of a model -- including case sensitivity.
+    config:
+      materialized: table
